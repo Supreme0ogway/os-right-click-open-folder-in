@@ -44,15 +44,15 @@ Reading is fine and often useful: `git status`, `git diff`, `git log`, `git show
 
 ---
 
-# 3. The sibling app is read-only
+# 3. This repo only
 
-This app's interface comes from `../os-right-click-create-file`, and it is **copied
-out, never edited in place.**
+**Write inside this repo and nowhere else.** The folders alongside it are other
+apps. Each one is working and installed, with its own history, so a change made
+over there to make something work in here is a change nobody asked for, in a repo
+nobody was looking at.
 
-**Read it as much as you like** — that is what it is there for. It is a working,
-installed app with its own history, so a change made in it to make something here
-work is a change nobody asked for, in a repo nobody was looking at.
+**Read them as much as you like** — that is what they are there for.
 
-* **Copy in this direction only.** Files move from there to here.
-* **Editing it needs to be asked for by name**, and then it is that job and not this one.
-* The same goes for every other folder in `self-made-helper-apps/`.
+* **Copy in one direction only.** Files come here; nothing goes back.
+* **Editing another app needs to be asked for by name**, and then it is that job
+  and not this one.
