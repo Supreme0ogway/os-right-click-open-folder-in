@@ -20,15 +20,15 @@ add.
 - **Add an app** three ways: from a dropdown of the apps this mac can already open a
   folder with — the mac's own answer, so an editor you installed this morning is in it —
   by choosing one out of your Applications folder, or by typing a bundle name yourself.
-  The same dropdown is on the screen that edits an app, so an entry can be pointed
-  somewhere else without being removed and added again. What you type is checked as you go: no spaces, no slashes or colons,
-  and a bundle name has parts, as in `com.apple.Terminal`.
+  A bundle name you type is checked as you go: no spaces, no slashes or colons, and it
+  has parts, as in `com.apple.Terminal`.
+- **Point an app somewhere else.** The screen that edits an app has the same dropdown,
+  so an entry can be aimed at a different app without being removed and added again.
 - **Pick a default.** It leads the menu and carries the mark. The same button takes it
   back off again, which leaves none picked, and none picked is a normal state. In
   settings, *Other…* reveals a second dropdown of every app this mac can open a folder
   with, so a default can be picked without going to add the app first — taking one from
   there adds it to your list on the way.
-
 - **Search** your apps by name or by the name the mac knows them under.
 - **Drag to reorder** them. The order in the list is the order in the menu.
 - **Choose where the menu appears** — everywhere, or only in folders you pick. A folder
@@ -39,10 +39,11 @@ add.
   takes it back out and leaves it running. Quit is in the menu bar item.
 - **Opens at login**, if you want it to.
 
-An app you removed from `/Applications` still shows in the list, marked *Not installed*,
-and says so rather than opening nothing. The menu bar also says when the menu is
-switched off by your own settings — no folders chosen, or no apps left — because both
-are allowed and both look exactly like the app being broken.
+An app you removed from `/Applications` stays in the list, drawn with the dashed icon
+the Finder uses for something missing, and its own screen says *Not installed* under the
+bundle name. Clicking it in the menu says so rather than doing nothing. The menu bar
+says when the menu is switched off by your own settings — no folders chosen, or no apps
+left — because both are allowed and both look exactly like the app being broken.
 
 ## Install
 
@@ -101,7 +102,7 @@ not sandboxed                        sandboxed, because it must be
 menu bar, window, login item         thin. builds the menu, forwards a click
 ** opens every folder **             reads the list, launches nothing
         |                                      ^
-        | writes list, default, scope           | reads
+        | writes list, default, scope          | reads
         +---------> shared app group <---------+
 ```
 
