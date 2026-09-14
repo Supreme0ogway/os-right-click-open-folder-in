@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "apps": [
+    {
+      "id": "core:terminal",
+      "displayName": "Terminal",
+      "bundleIdentifier": "com.apple.Terminal"
+    },
+    {
+      "id": "core:finder",
+      "displayName": "Finder",
+      "bundleIdentifier": "com.apple.finder"
+    }
+  ]
+}

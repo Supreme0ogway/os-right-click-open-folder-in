@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "releases": [
+    {
+      "version": "1.0.0",
+      "when": "2026-09-14",
+      "notes": [
+        "An Open Folder In entry in the right click menu, on a folder and on the background of any Finder window, with your apps flying out of it under the icon the mac already uses for each.",
+        "A default app, marked and first in the list, the way the Finder's own Open With marks a file's default. Pick it from your list, or pick Other and take any app this mac has, which adds it to your list on the way.",
+        "Arrives with Terminal and Finder. Everything else you add, from a dropdown of the apps this mac can already open a folder with, by choosing one out of your Applications folder, or from a bundle name you type.",
+        "Search your apps, drag them into the order the menu shows them in, and remove any of them. Remove them all and the menu goes back to looking untouched.",
+        "Choose where the menu appears: everywhere, or only in folders you pick.",
+        "Write your apps out to a file and bring them back in.",
+        "Opens at login, lives in the menu bar, and shows in the dock only while its window is open."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+/* The app's name, shown at the top of its window. */
+"app.name" = "Open Folder In";
+
+/* Shown in place of the list when the user has removed every app. */
+"editor.empty-title" = "No apps";
+
+/* Explains that an empty list is allowed and what it does. */
+"editor.empty-message" = "Your right click menu shows nothing at all. Add an app to bring it back.";
+
+/* Button that removes the app on this row. */
+"editor.remove" = "Remove";
+
+/* Label for the name shown in the right click menu. */
+"editor.name" = "Name";
+
+/* Label for the name the mac finds the app by, such as com.apple.Terminal. */
+"editor.bundle-identifier" = "Bundle name";
+
+/* Shown in the right hand side when no app has been picked yet. */
+"editor.nothing-picked-title" = "No app selected";
+
+/* Tells the user to pick an app from the list to change it. */
+"editor.nothing-picked-message" = "Pick an app on the left to change it, or add a new one.";
+
+/* Shown when a search matched none of the apps. */
+"editor.no-matches-title" = "No matches";
+
+/* Tells the user their search matched nothing. */
+"editor.no-matches-message" = "No app matches what you typed.";
+
+/* The search box above the list of apps. */
+"editor.search" = "Search apps";
+
+/* A few words under the name box. */
+"editor.name-hint" = "Shown in the right click menu";
+
+/* A few words under the bundle name box saying what is allowed. */
+"editor.bundle-identifier-hint" = "What the mac finds the app by, such as com.apple.Terminal";
+
+/* Shown on a row whose app is not on this mac. */
+"editor.not-installed" = "Not installed";
+
+/* Button that makes this app the one a folder opens in by default. */
+"editor.make-default" = "Make Default";
+
+/* Button that stops this app being the one a folder opens in by default. */
+"editor.remove-default" = "Remove as Default";
+
+/* Shown on the app a folder opens in by default. */
+"editor.is-default" = "Default";
+
+/* Button that goes back from the settings screen to the list of apps. */
+"window.back" = "Back";
+
+/* Button that opens the settings screen. */
+"window.settings" = "Settings";
+
+/* Button that adds an app, shown as a plus in the toolbar. */
+"window.add-app" = "Add App";
+
+/* Label for the dropdown of apps this mac can already open a folder with. */
+"add.found" = "App";
+
+/* The entry in the dropdown that lets a bundle name be typed in. */
+"add.custom" = "Other…";
+
+/* Button that adds the app and closes the screen. */
+"add.confirm" = "Add";
+
+/* Button that closes the screen without adding anything. */
+"add.cancel" = "Cancel";
+
+/* What the bundle name box shows while it is empty. */
+"add.bundle-identifier-placeholder" = "com.example.editor";
+
+/* Button that opens the panel for picking an app off the disk. */
+"add.browse" = "Choose App…";
+
+/* Shown in the dropdown while no app has been picked at all. */
+"add.choose-prompt" = "Choose an app…";
+
+/* Title of the panel for picking an app off the disk. */
+"add.choose-application" = "Choose an app to open folders in";
+
+/* Choice that shows the menu in every folder. */
+"scope.everywhere" = "Everywhere";
+
+/* Choice that shows the menu only in folders the user picks. */
+"scope.picked-folders" = "Only these folders";
+
+/* Explains that a picked folder also covers what is inside it. */
+"scope.picked-note" = "A folder you choose includes every folder inside it.";
+
+/* Button that opens the panel for picking a folder. */
+"scope.add-folder" = "Add Folder…";
+
+/* Title of the panel for picking a folder. */
+"scope.choose-folder" = "Choose a folder the menu should appear in";
+
+/* Button that confirms the picked folder. */
+"scope.choose" = "Choose";
+
+/* Explains that the menu now appears nowhere. */
+"scope.nowhere-message" = "Your right click menu shows nothing anywhere. Add a folder, or switch to Everywhere.";
+
+/* Heading of the part of settings choosing where the menu appears. */
+"scope.title" = "Where It Appears";
+
+/* Heading of the part of settings choosing which app a folder opens in by default. */
+"default-app.title" = "Default App";
+
+/* Label for the choice of which app a folder opens in by default. */
+"default-app.label" = "Open folders in";
+
+/* The entry in the dropdown that picks no default at all. */
+"default-app.none" = "None";
+
+/* Explains what picking a default app does. */
+"default-app.note" = "The default app comes first in the menu and is marked, the way Open With marks a file's default.";
+
+/* Label for the second dropdown, revealed when Other is picked. */
+"default-app.other-label" = "Another app on this mac";
+
+/* Explains that picking an app here adds it to the list as well. */
+"default-app.other-note" = "Picking one here adds it to your list too, so the menu can offer it.";
+
+/* Heading of the part of settings that writes apps out and reads them back. */
+"transfer.title" = "Import/Export List";
+
+/* Button that writes every app out to a file. */
+"transfer.export" = "Export…";
+
+/* Button that reads apps back in from a file. */
+"transfer.import" = "Import…";
+
+/* Explains what exporting and importing do. */
+"transfer.note" = "Importing adds to your list.";
+
+/* Title of the panel for choosing where to write the apps. */
+"transfer.choose-destination" = "Where should your apps go?";
+
+/* Title of the panel for choosing a file of apps to read. */
+"transfer.choose-source" = "Choose a file of apps";
+
+/* Shown when a file of apps cannot be read. */
+"transfer.file-is-damaged" = "That file is corrupted and cannot be read.";
+
+/* Heading of the part of settings saying what the app is. */
+"about.title" = "About";
+
+/* Shown beside the version number. %@ is the version, such as 1.0.0. */
+"about.version" = "Version %@";
+
+/* Heading above the list of what changed in the newest release. */
+"about.whats-new" = "What's new";
+
+/* Shown beside Open at Login when the user still has to allow it in System Settings. */
+"login.waiting" = "Open at Login (allow it in System Settings)";
+
+/* Shown when a box has been left empty. */
+"problem.missing" = "This cannot be empty.";
+
+/* Shown when a space was typed into the bundle name. */
+"problem.holds-space" = "A bundle name cannot hold a space.";
+
+/* Shown when a character was typed that no bundle name holds. */
+"problem.holds-path-character" = "A bundle name holds only letters, digits, dots and hyphens.";
+
+/* Shown when a bundle name was typed with no dot in it. */
+"problem.missing-dot" = "A bundle name has parts, as in com.apple.Terminal.";
+
+/* Shown when more was typed than any real bundle name runs to. */
+"problem.too-long" = "That is longer than any bundle name.";
+
+/* Title of the question asked before an app is removed. %@ is its name. */
+"remove.question" = "Remove “%@”?";
+
+/* Explains that removing an app cannot be undone. */
+"remove.warning" = "It will be taken out of your right click menu. This cannot be undone.";
+
+/* Button that goes ahead with removing an app. */
+"remove.confirm" = "Remove";
+
+/* Button that leaves the app alone. */
+"remove.cancel" = "Cancel";

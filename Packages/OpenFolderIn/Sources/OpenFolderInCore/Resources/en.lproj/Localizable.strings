@@ -1,0 +1,5 @@
+/* The one entry added to the right click menu. Hovering it opens the apps. */
+"menu.parent" = "Open Folder In";
+
+/* Marks the app a folder opens in unless another is picked. %@ is the app's name. */
+"menu.default" = "%@ (default)";

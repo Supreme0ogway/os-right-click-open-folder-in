@@ -1,0 +1,104 @@
+name: OpenFolderIn
+
+options:
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: false
+
+settings:
+  base:
+    DEVELOPMENT_TEAM: ${TEAM_ID}
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    ENABLE_HARDENED_RUNTIME: YES
+    ALWAYS_SEARCH_USER_PATHS: NO
+
+packages:
+  OpenFolderIn:
+    path: Packages/OpenFolderIn
+
+targets:
+
+  OpenFolderIn:
+    type: application
+    platform: macOS
+    sources:
+      - path: bundles/app
+    info:
+      path: bundles/app/Info.plist
+      properties:
+        CFBundleName: Open Folder In
+        CFBundleDisplayName: Open Folder In
+        CFBundleIconFile: AppIcon
+        CFBundleIconName: AppIcon
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
+        LSUIElement: true
+        NSHumanReadableCopyright: ""
+        CFBundleURLTypes:
+          - CFBundleURLName: com.willlattus.open-folder-in.open
+            CFBundleURLSchemes:
+              - open-folder-in
+    entitlements:
+      path: bundles/app/app.entitlements
+      properties:
+        com.apple.security.app-sandbox: false
+        com.apple.security.application-groups:
+          - ${TEAM_ID}.group.com.willlattus.open-folder-in
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.willlattus.open-folder-in
+        PRODUCT_NAME: Open Folder In
+        INFOPLIST_KEY_NSHumanReadableCopyright: ""
+        COMBINE_HIDPI_IMAGES: YES
+    dependencies:
+      - target: finder-extension
+      - package: OpenFolderIn
+        product: OpenFolderInUI
+      - package: OpenFolderIn
+        product: OpenFolderInCore
+
+  finder-extension:
+    type: app-extension
+    platform: macOS
+    sources:
+      - path: bundles/finder-extension
+    info:
+      path: bundles/finder-extension/Info.plist
+      properties:
+        CFBundleName: finder-extension
+        CFBundleDisplayName: Open Folder In
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.FinderSync
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).FinderMenuExtension
+    entitlements:
+      path: bundles/finder-extension/finder-extension.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.application-groups:
+          - ${TEAM_ID}.group.com.willlattus.open-folder-in
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.willlattus.open-folder-in.finder-extension
+        PRODUCT_MODULE_NAME: FinderExtension
+        SKIP_INSTALL: YES
+    dependencies:
+      - package: OpenFolderIn
+        product: OpenFolderInCore
+
+schemes:
+  OpenFolderIn:
+    build:
+      targets:
+        OpenFolderIn: all
+        finder-extension: all
+    run:
+      config: Debug

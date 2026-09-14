@@ -1,0 +1,106 @@
+SCHEME     := OpenFolderIn
+APP_NAME   := Open Folder In
+BUNDLE_ID  := com.willlattus.open-folder-in
+EXT_ID     := $(BUNDLE_ID).finder-extension
+
+# Your team id lives in .env, which is never committed. Copy sample.env to start.
+-include .env
+export TEAM_ID
+
+INSTALL_DIR := /Applications
+APP        := $(INSTALL_DIR)/$(APP_NAME).app
+BUILT      := .dist/Build/Products/Debug/$(APP_NAME).app
+PACKAGE    := Packages/OpenFolderIn
+
+.DEFAULT_GOAL := help
+.PHONY: help bootstrap gen build test lint spelling run stop install register diagnose clean
+
+help:
+	@echo "make bootstrap   install xcodegen + swiftlint, check signing identity"
+	@echo "make test        the test run. swift test in $(PACKAGE). no Xcode"
+	@echo "make lint        swiftlint"
+	@echo "make run         build, install, register the extension, restart Finder, launch"
+	@echo "make diagnose    is the extension registered and enabled? any sandbox denials?"
+	@echo "make clean       remove build products and the generated project"
+
+bootstrap:
+	@./scripts/bootstrap.sh
+
+gen:
+	@test -n "$(TEAM_ID)" || { \
+		echo "No TEAM_ID. Copy sample.env to .env and put your Apple team id in it."; \
+		exit 1; \
+	}
+	@xcodegen generate --quiet
+	@echo "generated $(SCHEME).xcodeproj"
+
+test:
+	@swift test --package-path $(PACKAGE)
+
+lint: spelling
+	@swiftlint lint --quiet --strict
+
+# SwiftLint only reads Swift, so the wrong spelling can hide in a strings file,
+# a plist or a data file. This reads everything that is tracked.
+spelling:
+	@! grep -rniE "colo[u]r" --include='*' \
+		--exclude-dir=.git --exclude-dir=.dist --exclude-dir=.build \
+		--exclude-dir=DerivedData --exclude-dir='*.xcodeproj' \
+		--exclude=LICENSE --exclude=.swiftlint.yml --exclude=CODE-RULES.md . \
+		|| { echo "Spell it color. The rule is in docs/CODE-RULES.md."; exit 1; }
+
+# Piping xcodebuild through grep would hand back grep's result, so a failed build
+# looked like a good one and the last working app got installed over and over.
+build: gen
+	@mkdir -p .dist
+	@xcodebuild -project $(SCHEME).xcodeproj -scheme $(SCHEME) \
+		-configuration Debug -derivedDataPath .dist \
+		-destination 'platform=macOS' build > .dist/build.log 2>&1 \
+		|| { grep -E "error:" .dist/build.log | head -20; echo "BUILD FAILED"; exit 1; }
+	@echo "** BUILD SUCCEEDED **"
+
+run: build install register
+	@killall Finder 2>/dev/null || true
+	@open "$(APP)"
+	@echo
+	@echo "Running. Right-click a folder."
+	@echo "If the entry is missing, run: make diagnose"
+
+install: stop
+	@mkdir -p "$(INSTALL_DIR)"
+	@rm -rf "$(APP)"
+	@ditto "$(BUILT)" "$(APP)"
+	@echo "installed $(APP)"
+
+# Installing over a running app leaves the old one running, and then `open` does
+# nothing because it is already open, so every test runs against the previous build.
+stop:
+	@pkill -f "$(APP_NAME).app/Contents/MacOS" 2>/dev/null || true
+	@sleep 1
+
+register:
+	@pluginkit -r "$(BUILT)/Contents/PlugIns/finder-extension.appex" 2>/dev/null || true
+	@pluginkit -a "$(APP)/Contents/PlugIns/finder-extension.appex" 2>/dev/null || true
+	@pluginkit -e use -i $(EXT_ID) 2>/dev/null || true
+	@echo "registered $(EXT_ID)"
+
+diagnose:
+	@echo "== every registered copy (a '=' means a stale duplicate is winning) =="
+	@pluginkit -m -A -D -i $(EXT_ID) -vvv 2>/dev/null || echo "  NOT REGISTERED"
+	@echo
+	@echo "== election: + use, - ignore, ! debugger, = superseded =="
+	@pluginkit -m -i $(EXT_ID) 2>/dev/null || echo "  not listed"
+	@echo
+	@echo "== all FinderSync extensions on this Mac =="
+	@pluginkit -m -p com.apple.FinderSync -vvv 2>/dev/null || echo "  none"
+	@echo
+	@echo "== live log. open a folder now, then ctrl-C =="
+	@log stream --style compact \
+		--predicate 'subsystem == "$(BUNDLE_ID)" OR (eventMessage CONTAINS "deny(" AND eventMessage CONTAINS "open-folder-in")'
+
+clean:
+	@rm -rf .dist $(SCHEME).xcodeproj
+	@swift package --package-path $(PACKAGE) clean 2>/dev/null || true
+	@echo "cleaned"
+
+# Written by hand, not generated. Kept last so the rest stays readable.
